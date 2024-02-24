@@ -2,104 +2,104 @@ from data_create import name_data, surname_data, phone_data, adress_data
 
 def remove_empty_lines(file_name):
     with open(file_name, "r") as file:
-        lines = file.readlines()
+        str = file.readlines()
 
-    modified_lines = []
-    for line in lines:
-        if line.strip():  # проверяем, что строка не пустая
-            modified_lines.append(line)
+    modified_str = []
+    for i in str:
+        if i.strip(): 
+            modified_str.append(i)
 
     with open(file_name, "w") as file:
-        for line in modified_lines:
-            file.write(line)
+        for i in modified_str:
+            file.write(i)
 
-def edit_data():
+def change_data():
     remove_empty_lines("data_first_variant.csv")
     remove_empty_lines("data_second_variant.csv")
-    choice = int(input("Выберите вариант:\n1 - Изменить данные в первом файле\n2 - Изменить данные во втором файле\n"))
-    while choice != 1 and choice != 2:
+    var = int(input("Выберите вариант:\n1 - Изменить данные в первом файле\n2 - Изменить данные во втором файле\n"))
+    while var != 1 and var != 2:
         print("Неправильный ввод")
-        choice = int(input("Выберите вариант:\n1 - Изменить данные в первом файле\n2 - Изменить данные во втором файле\n"))
+        var = int(input("Выберите вариант:\n1 - Изменить данные в первом файле\n2 - Изменить данные во втором файле\n"))
 
-    if choice == 1:
+    if var == 1:
         with open("data_first_variant.csv", 'r', encoding='utf-8') as f:
             data = f.readlines()        
 
-        print("Доступные данные для изменения:")
+        print("Вы можете изменить следующие данные:")
         print(*data)
 
-        line_number = int(input("Введите номер строки, которую хотите изменить: "))
-        while line_number < 1 or line_number > len(data):
+        str_number = int(input("Введите номер строки, которую хотите изменить: "))
+        while str_number < 1 or str_number > len(data):
             print("Неправильный номер строки")
-            line_number = int(input("Введите номер строки, которую хотите изменить: "))
+            str_number = int(input("Введите номер строки, которую хотите изменить: "))
 
         new_data = input("Введите новые данные: ") 
 
-        data[line_number-1] = new_data + " \n"
+        data[str_number-1] = new_data + " \n"
 
         with open("data_first_variant.csv", 'w', encoding='utf-8') as f:
             f.writelines(data)
-        print ("Спасибо, изменения сохранены")
+        print ("Изменения сохранены")
 
-    elif choice == 2:
+    elif var == 2:
         with open("data_second_variant.csv", 'r', encoding='utf-8') as f:
             data = f.readlines()            
 
-        print("Доступные данные для изменения:")
+        print("Вы можете изменить следующие данные:")
         print(*data)
 
-        line_number = int(input("Введите номер строки, которую хотите изменить: "))
-        while line_number < 1 or line_number > len(data):
+        str_number = int(input("Введите номер строки, которую хотите изменить: "))
+        while str_number < 1 or str_number > len(data):
             print("Неправильный номер строки")
-            line_number = int(input("Введите номер строки, которую хотите изменить: "))
+            str_number = int(input("Введите номер строки, которую хотите изменить: "))
 
         new_data = name_data() + "; " + surname_data() + "; " + phone_data() + "; " + address_data()
 
-        data[line_number-1] = new_data + "\n"
+        data[str_number-1] = new_data + "\n"
 
         with open("data_second_variant.csv", 'w', encoding='utf-8') as f:
             f.writelines(data)
-        print ("Спасибо, изменения сохранены")
+        print ("Изменения сохранены")
 
 
-def delete_data():
-    choice = int(input("Выберите вариант:\n1 - Удалить данные из первого файла\n2 - Удалить данные из второго файла\n"))
-    while choice != 1 and choice != 2:
+def del_data():
+    var = int(input("Выберите вариант:\n1 - Удалить данные из первого файла\n2 - Удалить данные из второго файла\n"))
+    while var != 1 and var != 2:
         print("Неправильный ввод")
-        choice = int(input("Выберите вариант:\n1 - Удалить данные из первого файла\n2 - Удалить данные из второго файла\n"))
+        var = int(input("Выберите вариант:\n1 - Удалить данные из первого файла\n2 - Удалить данные из второго файла\n"))
 
-    if choice == 1:
+    if var == 1:
         with open("data_first_variant.csv", 'r', encoding='utf-8') as f:
             data = f.readlines()
 
-        print("Доступные данные для удаления:")
+        print("Вы можете удалить следующие данные:")
         print(*data)
 
-        line_number = int(input("Введите номер строки, которую хотите удалить: "))
-        while line_number < 1 or line_number > len(data):
+        str_number = int(input("Введите номер строки, которую хотите удалить: "))
+        while str_number < 1 or str_number > len(data):
             print("Неправильный номер строки")
-            line_number = int(input("Введите номер строки, которую хотите удалить: "))
+            str_number = int(input("Введите номер строки, которую хотите удалить: "))
 
-        del data[line_number-1]
+        del data[str_number-1]
 
         with open("data_first_variant.csv", 'w', encoding='utf-8') as f:
             f.writelines(data)
-        print ("Спасибо, данные удалены")
+        print ("Данные удалены")
 
-    elif choice == 2:
+    elif var == 2:
         with open("data_second_variant.csv", 'r', encoding='utf-8') as f:
             data = f.readlines()
 
-        print("Доступные данные для удаления:")
+        print("Вы можете удалить следующие данные:")
         print(*data)
 
-        line_number = int(input("Введите номер строки, которую хотите удалить: "))
-        while line_number < 1 or line_number > len(data):
+        str_number = int(input("Введите номер строки, которую хотите удалить: "))
+        while str_number < 1 or str_number > len(data):
             print("Неправильный номер строки")
-            line_number = int(input("Введите номер строки, которую хотите удалить: "))
+            str_number = int(input("Введите номер строки, которую хотите удалить: "))
 
-        del data[line_number-1]
+        del data[str_number-1]
 
         with open("data_second_variant.csv", 'w', encoding='utf-8') as f:
             f.writelines(data)
-        print ("Спасибо, данные удалены")
+        print ("Данные удалены")
